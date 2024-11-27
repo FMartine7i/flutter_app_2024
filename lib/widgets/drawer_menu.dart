@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_base/helpers/theme_provider.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List<Map<String, String>> _menuItems = <Map<String, String>>[
     {'route': 'home', 'title': 'Home', 'subtitle': 'Home + counter app'},
-    {'route': 'custom_list', 'title': 'Custom list', 'subtitle': ''},
+    {'route': 'custom_list', 'title': 'Songs', 'subtitle': ''},
     {'route': 'profile', 'title': 'Perfil usuario', 'subtitle': ''},
   ];
 
@@ -11,6 +13,8 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -38,7 +42,16 @@ class DrawerMenu extends StatelessWidget {
                           Navigator.pushNamed(context, item['route']!);
                         },
                       ))
-                  .toList())
+                  .toList()),
+                  ListTile(
+                    title: const Text('Dark mode'),
+                    trailing: Switch(
+                      value: themeProvider.isDarkmode,
+                      onChanged: (value) {
+                        themeProvider.toggleTheme();  // Cambia el tema
+                      },
+                  )
+          ),
         ],
       ),
     );
@@ -61,33 +74,9 @@ class _DrawerHeaderAlternative extends StatelessWidget {
             width: 130,
             height: 130,
             decoration: BoxDecoration(
-                color: Colors.blueAccent.withOpacity(0.5),
+                color: const Color.fromARGB(255, 139, 30, 185).withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10)),
             transform: Matrix4.rotationZ(0.2),
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          left: 140,
-          child: Container(
-            width: 100,
-            height: 100,
-            decoration: BoxDecoration(
-                color: Colors.redAccent.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(10)),
-            transform: Matrix4.rotationZ(0.9),
-          ),
-        ),
-        Positioned(
-          top: 30,
-          right: 35,
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-                color: Colors.amber.withOpacity(0.4),
-                borderRadius: BorderRadius.circular(10)),
-            transform: Matrix4.rotationZ(0.9),
           ),
         ),
         Positioned(
