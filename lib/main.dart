@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
 import 'package:flutter_application_base/screens/screens.dart';
 import 'package:flutter_application_base/helpers/theme_provider.dart';
+import 'package:flutter_application_base/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -21,9 +22,12 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child){
           return MaterialApp(
+            title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
             initialRoute: 'home',
-            theme: Preferences.darkmode ? ThemeData.dark() : ThemeData.light(),
+            theme: DefaultTheme.lightTheme,
+            darkTheme: DefaultTheme.darkTheme,
+            themeMode: Preferences.darkmode ? ThemeMode.dark : ThemeMode.light,
             routes: {
               'home': (context) => const HomeScreen(),
               'custom_list': (context) => const CustomListScreen(),

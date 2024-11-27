@@ -40,6 +40,12 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+  - family: Poppins
+    fonts:
+      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/Poppins-Bold.ttf
+      - asset: assets/fonts/Poppins-Medium.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -50,7 +56,8 @@ flutter:
   assets:
     - assets/loading.gif
     - assets/images/
-    - assets/avatars/    
+    - assets/avatars/
+    - assets/songs/    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
