@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CustomListItem extends StatelessWidget {
-  const CustomListItem({
-    super.key,
-  });
+  const CustomListItem({ super.key });
 
   @override
   Widget build(BuildContext context) {
     // Obtiene los argumentos pasados
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     // Accede a cada argumento con su clave
     final size = MediaQuery.of(context).size;
 

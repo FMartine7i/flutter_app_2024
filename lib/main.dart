@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
             themeMode: Preferences.darkmode ? ThemeMode.dark : ThemeMode.light,
             routes: {
               'home': (context) => const HomeScreen(),
-              'custom_list': (context) => const CustomListScreen(),
+              'songs_list': (context) => const SongsListScreen(),
               'profile': (context) => const ProfileScreen(),
-              'custom_list_item': (context) => const CustomListItem(),
+              'songs_list_item': (context) => const CustomListItem(),
           });
         }
       )  

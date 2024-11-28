@@ -1,17 +1,15 @@
-import 'dart:developer';
 import 'package:flutter_application_base/mocks/songs_mock.dart' show elements;
 import 'package:flutter/material.dart';
 
-class CustomListScreen extends StatefulWidget {
-  const CustomListScreen({super.key});
+class SongsListScreen extends StatefulWidget {
+  const SongsListScreen({super.key});
 
   @override
-  State<CustomListScreen> createState() => _CustomListScreenState();
+  State<SongsListScreen> createState() => _SongsListScreenState();
 }
 
-class _CustomListScreenState extends State<CustomListScreen> {
+class _SongsListScreenState extends State<SongsListScreen> {
   List _auxiliarElements = [];
-  String _searchQuery = '';
   bool _searchActive = false;
 
   final TextEditingController _searchController = TextEditingController();
@@ -31,16 +29,17 @@ class _CustomListScreenState extends State<CustomListScreen> {
     super.dispose();
   }
 
-  void _updateSearch(String? query) {
+  void _updateSearch(String query) {
     setState(() {
-      _searchQuery = query ?? '';
-      if (_searchQuery.isEmpty) {
-        _auxiliarElements = elements; // Restablecer al estado original
-      } else {
-        _auxiliarElements = elements.where((element) {
-          return element[1].toLowerCase().contains(_searchQuery.toLowerCase());
-        }).toList();
-      }
+      _auxiliarElements = elements.where((element) {
+        return element[1].toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
+  }
+
+  void _toggleFavorite(int index) {
+    setState(() {
+      _auxiliarElements[index][5] = !_auxiliarElements[index][5];
     });
   }
 
@@ -51,75 +50,42 @@ class _CustomListScreenState extends State<CustomListScreen> {
       child: Scaffold(
           body: Column(children: [
         searchArea(),
-        listItemsArea(),
+        songsItemsArea(),
       ])),
     );
   }
 
-  Expanded listItemsArea() {
+  Expanded songsItemsArea() {
     return Expanded(
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: _auxiliarElements.length,
         itemBuilder: (BuildContext context, int index) {
+          final item = _auxiliarElements[index];
+
           return GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, 'custom_list_item',
+              Navigator.pushNamed(context, 'songs_list_item',
                   arguments: <String, dynamic>{
-                    'songCover': elements[index][0],
-                    'song': elements[index][1],
-                    'artist': elements[index][2],
-                    'album': elements[index][3]
+                    'songCover': item[0],
+                    'song': item[1],
+                    'artist': item[2],
+                    'album': item[3],
+                    'length': item[4],
+                    'isAdded': item[5]
                   });
               FocusManager.instance.primaryFocus?.unfocus();
             },
-            onLongPress: () {
-              log('onLongPress $index');
-            },
-            child: Container(
-              height: 100,
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(31, 229, 206, 246),
-                        blurRadius: 0,
-                        spreadRadius: 3,
-                        offset: Offset(0, 6))
-                  ]),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      'assets/songs/${_auxiliarElements[index][0]}.jpg',
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover
-                    )
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _auxiliarElements[index][1],
-                          style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                        ),
-                        Text(_auxiliarElements[index][2]),
-                        Text(_auxiliarElements[index][3])
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+           child: SongCard(
+            index: index,
+            id: item[0],
+            songName: item[1],
+            artistName: item[2],
+            albumName: item[3],
+            length: item[4],
+            isFavorite: item[5],
+            onFavoriteToggle: () => _toggleFavorite(index),
+            )
           );
         },
       ),
@@ -189,6 +155,70 @@ class _CustomListScreenState extends State<CustomListScreen> {
                 ],
               ),
             ),
+    );
+  }
+}
+
+class SongCard extends StatelessWidget {
+  final int index;
+  final String id;
+  final String songName;
+  final String artistName;
+  final String albumName;
+  final String length;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
+
+  const SongCard({
+    super.key,
+    required this.index,
+    required this.id,
+    required this.songName,
+    required this.artistName,
+    required this.albumName,
+    required this.length,
+    required this.isFavorite,
+    required this.onFavoriteToggle
+  });
+
+  @override
+  Widget build (BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(7),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(31, 206, 219, 246),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.all(10),
+        child: Row(
+          children: [
+            ClipRRect( 
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset( 'assets/songs/$id.jpg', width: 100, height: 100, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+                return Image.asset( 'assets/images/album.jpg', width: 100, height: 100, fit: BoxFit.cover );
+              })
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text( songName, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold) ),
+                  Text( artistName, style: const TextStyle(fontSize: 17) ),
+                  Text( albumName ),
+                  Text( length )
+                ],
+              ),
+            ),
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.add_box : Icons.add_box_outlined,
+              color: isFavorite ? const Color.fromARGB(255, 186, 88, 242) : Colors.grey
+            ),
+            onPressed: onFavoriteToggle,
+          ),
+        ],
+      ),
     );
   }
 }
