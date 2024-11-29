@@ -7,7 +7,7 @@ const List categorias = [
 ];
 
 final List elementos =
-//identificador, album, banda, cancion, año, true/false
+//identificador, album, banda, cancion, año, favorito
 [
   ['queen', 'A night at the Opera', 'Queen', 'Bohemian Rhapsody', 1975, true],
   ['beatles', 'Abbey Road', 'The Beatles', 'Her Majesty', 1969, true],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_base/mocks/albumes_mock.dart'
     show elementos;
 import 'album_individual.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AlbumesListScreen extends StatefulWidget {
   const AlbumesListScreen({super.key});
@@ -28,13 +29,20 @@ class AlbumesListScreenState extends State<AlbumesListScreen> {
     });
   }
 
-  void _toggleFavorite(int index) {
-  setState(() {
-    final mainIndex = elementos.indexOf(_filteredElements[index]);
-    elementos[mainIndex][5] = !elementos[mainIndex][5];
-  });
-}
+  void _toggleFavorite(int index) async {
+    setState(() {
+      final mainIndex = elementos.indexOf(_filteredElements[index]);
+      elementos[mainIndex][5] = !elementos[mainIndex][5];
+    });
 
+    final prefs = await SharedPreferences.getInstance();
+
+    final favoriteAlbums = elementos
+        .where((album) => album[5]) // Solo los favoritos
+        .map((album) => album[0].toString()) // Guardar el id del álbum
+        .toList();
+    await prefs.setStringList('favoriteAlbums', favoriteAlbums);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +83,6 @@ class AlbumesListScreenState extends State<AlbumesListScreen> {
                 ),
               );
 
-              
               setState(() {});
             },
             child: AlbumCard(
@@ -86,7 +93,7 @@ class AlbumesListScreenState extends State<AlbumesListScreen> {
               song: album[3],
               year: album[4],
               isFavorite: album[5],
-              onFavoriteToggle: () => _toggleFavorite(index), 
+              onFavoriteToggle: () => _toggleFavorite(index),
             ),
           );
         },
@@ -103,7 +110,7 @@ class AlbumCard extends StatelessWidget {
   final String song;
   final int year;
   final bool isFavorite;
-  final VoidCallback onFavoriteToggle; 
+  final VoidCallback onFavoriteToggle;
 
   const AlbumCard({
     super.key,
@@ -158,9 +165,11 @@ class AlbumCard extends StatelessWidget {
             IconButton(
               icon: Icon(
                 isFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isFavorite ? const Color.fromARGB(255, 145, 92, 155) : Colors.grey,
+                color: isFavorite
+                    ? const Color.fromARGB(255, 145, 92, 155)
+                    : Colors.grey,
               ),
-              onPressed: onFavoriteToggle, 
+              onPressed: onFavoriteToggle,
             ),
           ],
         ),
@@ -170,4 +179,3 @@ class AlbumCard extends StatelessWidget {
 }
 
 
-//TODO codigo que este habilitado para cuando se conecte con la api
