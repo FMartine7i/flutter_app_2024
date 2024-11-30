@@ -76,15 +76,15 @@ class _SongsListScreenState extends State<SongsListScreen> {
                   });
               FocusManager.instance.primaryFocus?.unfocus();
             },
-           child: SongCard(
-            index: index,
-            id: item[0],
-            songName: item[1],
-            artistName: item[2],
-            albumName: item[3],
-            length: item[4],
-            isFavorite: item[5],
-            onFavoriteToggle: () => _toggleFavorite(index),
+           child:SongCard(
+              index: index,
+              id: item[0],
+              songName: item[1],
+              artistName: item[2],
+              albumName: item[3],
+              length: item[4],
+              isFavorite: item[5],
+              onFavoriteToggle: () => _toggleFavorite(index),
             )
           );
         },
@@ -140,18 +140,18 @@ class _SongsListScreenState extends State<SongsListScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.keyboard_arrow_left_outlined)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.keyboard_arrow_left_outlined)),
                   IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _searchActive = !_searchActive;
-                        });
-                        _focusNode.requestFocus();
-                      },
-                      icon: const Icon(Icons.search)),
+                    onPressed: () {
+                      setState(() {
+                        _searchActive = !_searchActive;
+                      });
+                      _focusNode.requestFocus();
+                    },
+                    icon: const Icon(Icons.search)),
                 ],
               ),
             ),

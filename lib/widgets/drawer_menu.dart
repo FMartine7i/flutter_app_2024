@@ -9,6 +9,8 @@ class DrawerMenu extends StatefulWidget {
 }
 class _DrawerMenuState extends State<DrawerMenu> {
   bool _isExpanded = false;
+  String? _selectedMood;
+
   final List<Map<String, dynamic>> _menuItems = [
     {
       'route': 'home', 
@@ -23,7 +25,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
       'isExpandable': true, 
       'children': [
         {'route': 'songs_list', 'title': 'all songs'},
-        {'route': 'songs_by_mood', 'title': 'by mood'}
+        {'route': 'null', 'title': 'by mood'}
         ]
       },
     {
@@ -58,9 +60,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
             return Column(
               children: [
                 ListTile(
-                  contentPadding: const EdgeInsets.symmetric( vertical: 0, horizontal: 10 ),
+                  contentPadding: const EdgeInsets.symmetric( vertical: 5, horizontal: 20 ),
                   dense: true,
-                  minLeadingWidth: 25,
+                  minLeadingWidth: 30,
                   iconColor: Colors.deepPurpleAccent,
                   leading: Icon(item['icon']),
                   title: Column(
@@ -80,13 +82,18 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 if (isExpandable && _isExpanded)
                   ...item['children']!.map<Widget>((child) {
                     return Padding(
-                      padding: const EdgeInsets.only(left: 40),
+                      padding: const EdgeInsets.only(left: 50),
                       child: ListTile(
                         dense: true,
                         title: Text(child['title'], style: const TextStyle(fontSize: 16)),
                         onTap: () {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, child['route']!);
+                          if (child['title'] == 'by mood') {
+                            Navigator.pop(context);
+                            _showMoodDialog(context);
+                          } else {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, child['route']!);
+                          }
                         }
                       )  
                     );
@@ -105,6 +112,58 @@ class _DrawerMenuState extends State<DrawerMenu> {
             )
           ),
         ],
+      ),
+    );
+  }
+
+  void _showMoodDialog(BuildContext context) {
+    final moods = [
+      {'name': 'relaxed'},
+      {'name': 'happy'},
+      {'name': 'sad'},
+      {'name': 'angry'},
+      {'name': 'focused'},
+      {'name': 'romantic'},
+    ];
+    
+    showModalBottomSheet(
+      context: context, 
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [ 
+              const Text('select your mood', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              const SizedBox( height: 16 ),
+              ...moods.map((mood) {
+                final isSelected = _selectedMood  == mood['name'];
+                return ListTile(
+                  leading: Icon( isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked, color: const Color.fromARGB(255, 101, 56, 191)),
+                  title: Text(mood['name']!),
+                  onTap: () {
+                    Navigator.pop(context);
+                    if (mounted) {
+                    setState(() {
+                        _selectedMood = mood['name'];
+                      });
+                    }
+                    _filterByMood(mood['name']!);
+                  }
+                );
+              }
+            )]
+          )
+        );
+      }
+    );
+  }
+
+  void _filterByMood(String mood) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Filtering by mood: $mood'),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
