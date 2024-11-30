@@ -50,6 +50,8 @@ class AlbumesListScreenState extends State<AlbumesListScreen> {
       appBar: AppBar(
         title: TextField(
           decoration: const InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+            isDense: true,
             hintText: 'Buscar álbum...',
             border: InputBorder.none,
             hintStyle: TextStyle(color: Colors.white60),
