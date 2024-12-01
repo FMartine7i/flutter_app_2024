@@ -5,7 +5,7 @@ import 'package:flutter_application_base/helpers/theme_provider.dart';
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
   @override
-  _DrawerMenuState createState() => _DrawerMenuState();
+  State<DrawerMenu> createState() => _DrawerMenuState();
 }
 class _DrawerMenuState extends State<DrawerMenu> {
   bool _isExpanded = false;

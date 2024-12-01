@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             darkTheme: DefaultTheme.darkTheme,
             themeMode: Preferences.darkmode ? ThemeMode.dark : ThemeMode.light,
             routes: {
-              'login': (context) => LoginScreen(),
+              'login': (context) => const LoginScreen(),
               'home': (context) => const HomeScreen(),
               'songs_list': (context) => const SongsListScreen(),
               'profile': (context) => const ProfileScreen(),

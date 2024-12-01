@@ -52,13 +52,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
 
       _likedSongs = elements
-          .where((song) => song[4] == true)
+          .where((song) => song[5] == true)
           .map((song) => {
-                'songName': song[1],
-                'artist': song[2],
-                'album': song[3],
-              })
-          .toList();
+            'songCover': 'assets/songs/${song[0]}.jpg',
+            'songName': song[1],
+            'artist': song[2],
+            'album': song[3],
+          }).toList();
     });
   }
 
@@ -410,6 +410,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         itemBuilder: (context, index) {
                                           final song = _likedSongs[index];
                                           return ListTile(
+                                            leading: Image.asset(
+                                              song['songCover']!,
+                                              width: 50,
+                                              height: 50,
+                                              fit: BoxFit.cover,
+                                            ),
                                             title: Text(song['songName']!),
                                             subtitle: Text(
                                                 "${song['artist']} - ${song['album']}"),
