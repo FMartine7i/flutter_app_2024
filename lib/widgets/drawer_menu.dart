@@ -103,7 +103,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           }
         ),
         ListTile(
-          title: const Text('dark mode'),
+          title: const Text('dark mode', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           trailing: Switch(
             value: themeProvider.isDarkmode,
             onChanged: (value) {
