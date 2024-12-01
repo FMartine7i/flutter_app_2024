@@ -128,56 +128,45 @@ class AlbumCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.all(8.0),
-      elevation: 10.0,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            Image.asset(
-              'assets/albumes/$id.jpg',
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'assets/albumes/error.jpg',
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                );
-              },
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    albumName,
+    return Container(
+      margin: const EdgeInsets.all(7),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(31, 206, 219, 246),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset('assets/albumes/$id.jpg',
+                  width: 100, height: 100, fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                return Image.asset('assets/albumes/error.jpg',
+                    width: 100, height: 100, fit: BoxFit.cover);
+              })),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(albumName,
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text(bandName),
-                  Text('Año: $year'),
-                ],
-              ),
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                Text(bandName),
+                Text('Year: $year')
+              ],
             ),
-            IconButton(
-              icon: Icon(
-                isFavorite ? Icons.favorite : Icons.favorite_border,
+          ),
+          IconButton(
+            icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
                 color: isFavorite
-                    ? const Color.fromARGB(255, 145, 92, 155)
-                    : Colors.grey,
-              ),
-              onPressed: onFavoriteToggle,
-            ),
-          ],
-        ),
+                    ? const Color.fromARGB(255, 186, 88, 242)
+                    : Colors.grey),
+            onPressed: onFavoriteToggle,
+          ),
+        ],
       ),
     );
   }
 }
-
-
