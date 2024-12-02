@@ -91,7 +91,16 @@
     | **login** | permite iniciar sesión con usuario y contraseña.
     | **mostrar canciones** | permite mostrar canciones de un álbum.
     | **mostrar canción** | permite mostrar canción individual.
-    | **mostrar álbumes** | permite mostrar álbumes de un artista.
+    | **mostrar álbumes** | permite mostrar álbumes almacenados.
+    | **mostrar álbum** | permite mostrar álbum individual.
+    | **mostrar playlists** | permite mostrar las playlists de spotify.
+
+>[!Tip]
+> Las funcionalidades de la app se encuentran en desarrollo, por lo tanto se podrá ingresar a la app solo presionando el botón de ``login`` en la pantalla de inicio. No es necesario registrarse en la sección de ``sign up``.
+
+>[!Important]
+> Lo mismo sucede en el ``drawer menu``. Al seleccionar "songs" se desplegarán las opciones de ver todas las canciones y de elegir canciones por "mood". Esta segunda opción no está implementada, dado que esos datos se obtienen de la API de Spotify.
+> El botón "get started" en la ``home screen`` también accederá a buscar canciones por "mood", por lo tanto en esta versión no tiene una funcionalidad.
 
 ### Roadmap
 Constituir el backend con ``Node.Js`` para integrar la API de Spotify para obtener información de canciones, álbumes y artistas.

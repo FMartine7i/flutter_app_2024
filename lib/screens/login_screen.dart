@@ -150,37 +150,37 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  validate() {
-    String? validatePassword(String value) {
-      RegExp  regex = RegExp(r'^(?=.*[a-z])(?=.*[0-9])(?=.*?[!@#\$&*~]){8,}$');
-      if (value.isEmpty) {
-        return  'Please enter password';
-      } else if (!regex.hasMatch(value)) {
-        return 'Enter valid password';
-      } else {
-        return null;
-      }
-    }
-  }
+  // validate() {
+  //   String? validatePassword(String value) {
+  //     RegExp  regex = RegExp(r'^(?=.*[a-z])(?=.*[0-9])(?=.*?[!@#\$&*~]){8,}$');
+  //     if (value.isEmpty) {
+  //       return  'Please enter password';
+  //     } else if (!regex.hasMatch(value)) {
+  //       return 'Enter valid password';
+  //     } else {
+  //       return null;
+  //     }
+  //   }
+  // }
 
-  Future<void> _dialogBuilder(BuildContext context, String text) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('password'),
-          content: Text(text),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              }
-            )
-          ],
-        );
-      }
-    );
-  }
+  // Future<void> _dialogBuilder(BuildContext context, String text) {
+  //   return showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: const Text('password'),
+  //         content: Text(text),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
+  //             child: const Text('OK'),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             }
+  //           )
+  //         ],
+  //       );
+  //     }
+  //   );
+  // }
 }

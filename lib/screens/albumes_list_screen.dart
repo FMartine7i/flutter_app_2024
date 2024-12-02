@@ -8,16 +8,14 @@ class AlbumesListScreen extends StatefulWidget {
   const AlbumesListScreen({super.key});
 
   @override
-  AlbumesListScreenState createState() => AlbumesListScreenState();
+  State<AlbumesListScreen> createState() => _AlbumesListScreenState();
 }
 
-class AlbumesListScreenState extends State<AlbumesListScreen> {
-  String _searchQuery = '';
+class _AlbumesListScreenState extends State<AlbumesListScreen> {
   List<List<dynamic>> _filteredElements = elementos.cast<List<dynamic>>();
 
   void _updateSearchQuery(String query) {
     setState(() {
-      _searchQuery = query;
       _filteredElements = elementos
           .where((album) =>
               album[1].toString().toLowerCase().contains(

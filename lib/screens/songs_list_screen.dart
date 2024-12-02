@@ -18,7 +18,7 @@ class _SongsListScreenState extends State<SongsListScreen> {
   @override
   void initState() {
     super.initState();
-    _auxiliarElements = elements;
+    _auxiliarElements = elements.toList();
   }
 
   @override
@@ -39,6 +39,7 @@ class _SongsListScreenState extends State<SongsListScreen> {
 
   void _toggleFavorite(int index) {
     setState(() {
+      _auxiliarElements[index] = List.from(_auxiliarElements[index]);
       _auxiliarElements[index][5] = !_auxiliarElements[index][5];
     });
   }
