@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/widgets/drawer_menu.dart';
 
@@ -41,35 +40,28 @@ class HomeScreen extends StatelessWidget {
             const Text('Select your mood and let the music play!', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
             const SizedBox(height: 20),
             ShaderMask(shaderCallback: (bounds) => const LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 139, 44, 191), Colors.blueAccent
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight
+              colors: [
+                Color.fromARGB(255, 139, 44, 191), Colors.blueAccent
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight
                 ).createShader(bounds),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom( 
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    side: const BorderSide(color: Color.fromARGB(255, 108, 192, 228), width: 2)
-                    ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/songs_list');
-                  },
-                  child: const Text('Get started', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white))
-                )
+                style: ElevatedButton.styleFrom( 
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  side: const BorderSide(color: Color.fromARGB(255, 108, 192, 228), width: 2)
+                  ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/songs_list');
+                },
+                child: const Text('Get started', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Colors.white))
               )
-            ]
-          )
-        ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.plus_one),
-        onPressed: () {
-          log('click button');
-        },
+            )
+          ]
+        )
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }

@@ -94,6 +94,7 @@
     | **mostrar álbumes** | permite mostrar álbumes almacenados.
     | **mostrar álbum** | permite mostrar álbum individual.
     | **mostrar playlists** | permite mostrar las playlists de spotify.
+    | **mostrar perfil** | muestra el perfil del usuario. Permite agregar una foto personalizada, cambiar el nombre y ver sus canciones y álbumes favoritos.
 
 >[!Tip]
 > Las funcionalidades de la app se encuentran en desarrollo, por lo tanto se podrá ingresar a la app solo presionando el botón de ``login`` en la pantalla de inicio. No es necesario registrarse en la sección de ``sign up``.
