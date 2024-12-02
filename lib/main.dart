@@ -25,15 +25,17 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'Flutter Demo',
             debugShowCheckedModeBanner: false,
-            initialRoute: 'home',
+            initialRoute: 'login',
             theme: DefaultTheme.lightTheme,
             darkTheme: DefaultTheme.darkTheme,
             themeMode: Preferences.darkmode ? ThemeMode.dark : ThemeMode.light,
             routes: {
+              'login': (context) => const LoginScreen(),
               'home': (context) => const HomeScreen(),
-              'custom_list': (context) => const CustomListScreen(),
+              'songs_list': (context) => const SongsListScreen(),
               'profile': (context) => const ProfileScreen(),
-              'custom_list_item': (context) => const CustomListItem(),
+              'songs_list_item': (context) => const SongsListItem(),
+              'albums_list': (context) => const AlbumesListScreen(),            
               'playlists_list': (context) => const PlaylistsListScreen(),  
           });
         }
