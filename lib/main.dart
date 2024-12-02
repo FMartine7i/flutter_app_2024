@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_base/helpers/preferences.dart';
+import 'package:flutter_application_base/screens/playlists_list_screen.dart';
 import 'package:flutter_application_base/screens/screens.dart';
 import 'package:flutter_application_base/helpers/theme_provider.dart';
 import 'package:flutter_application_base/themes/default_theme.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
               'custom_list': (context) => const CustomListScreen(),
               'profile': (context) => const ProfileScreen(),
               'custom_list_item': (context) => const CustomListItem(),
+              'playlists_list': (context) => const PlaylistsListScreen(),  
           });
         }
       )  

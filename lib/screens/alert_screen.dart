@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class AlertScreen extends StatelessWidget {
-  const AlertScreen({Key ? key}) : super(key: key);
+  const AlertScreen({super.key});
 
   void displayDialog(BuildContext context) {
     showCupertinoDialog(
