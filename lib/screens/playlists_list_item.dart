@@ -54,7 +54,7 @@ class _PlaylistListItemState extends State<PlaylistListItem> {
               const SizedBox(height: 20),
 
               Text(
-                "Playlist:\n ${widget.playlist['playlistName']}",
+                "${widget.playlist['playlistName']}",
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 30,
