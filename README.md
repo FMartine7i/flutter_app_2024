@@ -32,7 +32,14 @@
 > - ``cd flutter_app_2024``
 > - Instalar dependencias con: ``flutter pub get``
 ### Ejecución
-> ``flutter run``
+> [!NOTE]
+> Emulador: 
+> * API 35
+> * dispositivo: Pixel 4 XL
+> * SO: Android 15
+> * 1440 x 3040
+
+> Correr el comando: ``flutter run``
 ### Estructura
 > - ``pubspec.yaml``: contiene las dependencias de la app
 > - ``lib``: contiene la lógica de la app
